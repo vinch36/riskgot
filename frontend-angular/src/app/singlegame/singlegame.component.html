@@ -1,0 +1,10 @@
+<div class="single-game-card" [ngClass]="{ liked: alreadyLiked }">
+  <h2>{{ game.title | uppercase }}</h2>
+  <a routerLink="/games"> Back </a>
+  <p>Mis en ligne le {{ game.createdDate | date: 'à HH:mm, le d MMMM yyyy'  }}</p>
+  <img [src]="game.imageUrl" [alt]="game.title">
+  <p>{{ game.description }}</p>
+  <button (click)="onAddSnap()">{{ snapButtonText }}</button>
+  <span [ngStyle]="{ color: 'rgb(0, 0,' + game.likes + ')' }">Likes: {{ game.likes }}</span>
+  <p *ngIf="game.location">Photo prise à {{ game.location }}</p>
+</div>

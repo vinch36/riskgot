@@ -1,0 +1,6 @@
+<div class="single-game-card" [ngClass]="{ liked: alreadyLiked }">
+  <h2>{{ game.title | uppercase }}</h2>
+  <p>{{ game.description }}</p>
+  <img [src]="game.imageUrl" [alt]="game.title">
+  <button (click)="onViewGame()">VIEW</button>
+</div>

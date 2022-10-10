@@ -1,0 +1,14 @@
+version: '3'
+services:
+  postgres-db:
+    container_name: risk-got-postgres-db
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: riskgot
+      POSTGRES_PASSWORD: TY]&HZ)e88}ZXBsTeQYQ
+      POSTGRES_DB: risk-got-db
+    volumes:
+      - ./../postgresql-data:/var/lib/postgresql/data

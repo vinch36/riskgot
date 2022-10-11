@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
 
 
   onAddNewGame(){
-    this.router.navigateByUrl('/create');
+    this.router.navigateByUrl('/games/create');
   }
 
 }

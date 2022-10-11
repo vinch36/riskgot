@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Game } from '../models/game.model';
-import { GamesService } from '../services/games.service';
+import { Game } from '../../../core/models/game.model';
+import { GamesService } from '../../../core/services/games.service';
 
 @Component({
   selector: 'app-single-game-light',

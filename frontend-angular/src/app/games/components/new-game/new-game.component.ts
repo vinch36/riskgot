@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
-import { Game } from '../models/game.model';
-import { GamesService } from '../services/games.service';
+import { map, Observable, tap } from 'rxjs';
+import { Game } from '../../../core/models/game.model';
+import { GamesService } from '../../../core/services/games.service';
 
 @Component({
   selector: 'app-new-game',
@@ -14,6 +14,7 @@ export class NewGameComponent implements OnInit {
 
 
   gameForm!: FormGroup;
+
 
   gamePreview$!: Observable<Game>;
   urlRegex!: RegExp;
@@ -33,7 +34,7 @@ export class NewGameComponent implements OnInit {
       map(formValue => ({
         ...formValue,
         createdDate: new Date(),
-        snaps: 0,
+        likes: 0,
         id: 0
       }))
     );
@@ -42,8 +43,10 @@ export class NewGameComponent implements OnInit {
 
 
   onSubmitForm(): void {
-    this.gamesService.addGame(this.gameForm.value);
-    this.router.navigateByUrl('/games');
+    this.gamesService.addGame(this.gameForm.value).pipe(
+      tap(()=>this.router.navigateByUrl('/games'))
+    ).subscribe();
+    
   }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { interval, tap , takeUntil, Subject } from 'rxjs';
-import { Game } from '../models/game.model';
-import { GamesService } from '../services/games.service';
+import { interval, tap , takeUntil, Subject, Observable } from 'rxjs';
+import { Game } from '../../../core/models/game.model';
+import { GamesService } from '../../../core/services/games.service';
 
 @Component({
   selector: 'app-game-list',
@@ -11,25 +11,19 @@ import { GamesService } from '../services/games.service';
 export class GameListComponent implements OnInit, OnDestroy {
 
 
-  games!:Game[];
+  games$!:Observable<Game[]>;
 
   private destroy$!:Subject<boolean>;
 
   constructor(private gamesService:GamesService) { }
 
   ngOnInit(): void {
-    this.destroy$=new Subject<boolean>();
-    this.games = this.gamesService.getAllGames();
-
-
-    interval(1000).pipe(
-      takeUntil(this.destroy$),
-      tap(console.log)
-    ).subscribe();
+   
+    //this.games = this.gamesService.getAllGames();
+    this.games$=this.gamesService.getAllGames();
   }
 
   ngOnDestroy(){
-    this.destroy$.next(true);
   }
 
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Game } from '../models/game.model';
-import { GamesService } from '../services/games.service';
+import { Observable, tap } from 'rxjs';
+import { Game } from '../../../core/models/game.model';
+import { GamesService } from '../../../core/services/games.service';
 
 @Component({
   selector: 'app-singlegame',
@@ -11,10 +12,10 @@ import { GamesService } from '../services/games.service';
 export class SinglegameComponent implements OnInit {
 
 
-  @Input() game!: Game;
+  game$!:Observable<Game>;
 
 
-  snapButtonText!:string;
+  likeButtonText!:string;
   alreadyLiked!:boolean;
 
   constructor(private gamesService:GamesService, private route:ActivatedRoute) {
@@ -22,22 +23,24 @@ export class SinglegameComponent implements OnInit {
     }
 
   ngOnInit(): void {
-      this.snapButtonText = 'Like'
+      this.likeButtonText = 'Like'
       this.alreadyLiked = false;
-      if (!this.game){
       const gameId=+this.route.snapshot.params['id'];
-      this.game = this.gamesService.getGameById(gameId);
-    }
+      this.game$ = this.gamesService.getGameById(gameId);
+    
   }
 
-  onLike() {
+  onLike(gameId: number) {
     if (!this.alreadyLiked){
-    this.gamesService.likeGameById(this.game.id,'like');
-    this.snapButtonText='Unlike'
+    this.game$=this.gamesService.likeGameById(gameId,'like').pipe(
+      tap(()=>this.likeButtonText='Unlike')
+    );
+    
     }
     else{
-      this.gamesService.likeGameById(this.game.id, 'unlike');
-      this.snapButtonText='Like'
+      this.game$=this.gamesService.likeGameById(gameId,'unlike').pipe(
+        tap(()=>this.likeButtonText='Like')
+      );
     }
     this.alreadyLiked=!this.alreadyLiked;
   }

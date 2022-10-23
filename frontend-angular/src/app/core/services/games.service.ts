@@ -2,32 +2,28 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core'
 import { map, Observable, switchMap } from 'rxjs';
 import { Game } from '../models/game.model'
-
+import {environment} from '../../../environments/environment'
 @Injectable({ providedIn: 'root' })
 
 export class GamesService {
 
-
+  SERVER_URL: string = environment.serverUrl;
   constructor(private http:HttpClient){}
 
 
   getAllGames(): Observable<Game[]> {
-    
-    return this.http.get<Game[]>('http://localhost:9001/game');
+
+    return this.http.get<Game[]>(this.SERVER_URL + 'games');
   }
 
   getGameById(gameId: number): Observable<Game> {
-   return this.http.get<Game>(`http://localhost:9001/game/${gameId}`);
+   return this.http.get<Game>(this.SERVER_URL + `games/${gameId}`);
   }
 
-  addGame(formValue: { title: string, description: string, imageUrl: string, location?: string }):Observable<Game> 
+  addGame(formValue: { title: string,gameMode:string, numberOfPlayers: number,description?:string, imageUrl?: string, }):Observable<Game>
   {
-    return this.http.post<Game>('http://localhost:9001/game',{
+    return this.http.post<Game>(this.SERVER_URL + 'games',{
       ...formValue,
-      createdDate: new Date(),
-      numberOfPlayers: 0,
-      currentNumberOfPlayers: 0,
-      likes:0      
     });
   }
 
@@ -38,7 +34,7 @@ export class GamesService {
         ...game,
         likes: game.likes + (likeType === 'like' ? 1 : -1)
       })),
-      switchMap(updatedGame => this.http.put<Game>(`http://localhost:9001/game/${gameId}`, updatedGame))
+      switchMap(updatedGame => this.http.put<Game>(this.SERVER_URL + `games/${gameId}`, updatedGame))
     );
 
   }

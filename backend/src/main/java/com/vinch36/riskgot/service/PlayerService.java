@@ -1,9 +1,8 @@
 package com.vinch36.riskgot.service;
 
-import com.vinch36.riskgot.model.Game;
-import com.vinch36.riskgot.model.Player;
-import com.vinch36.riskgot.repository.GameRepository;
-import com.vinch36.riskgot.repository.PlayerRepository;
+import com.vinch36.riskgot.controller.restapi.game.requestobjects.RequestPlayer;
+import com.vinch36.riskgot.model.game.Player;
+import com.vinch36.riskgot.repository.jpa.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +27,12 @@ public class PlayerService {
     }
 
     public Player savePlayer(Player player){
+        Player savedPlayer=playerRepository.save(player);
+        return savedPlayer;
+    }
+
+
+    public Player createPlayer(Player player){
         Player savedPlayer=playerRepository.save(player);
         return savedPlayer;
     }

@@ -1,9 +1,23 @@
 <div class="form-card">
-    <h2>NEW GAME</h2>
+    <h2>NOUVELLE PARTIE</h2>
     <form [formGroup]="gameForm">
       <div class="form-group">
              <label for="title">Titre</label>
              <input id="title" type="text" formControlName="title">
+         </div>
+         <div class="form-group">
+            <label for="gameMode">Type de jeu</label>
+            <select formControlName="gameMode">
+                <option disabled>Mode de jeu</option>
+                <option *ngFor="let suit of gameModeList" [ngValue]="suit">{{suit}}</option>
+              </select>
+         </div>
+         <div class="form-group">
+            <label for="numberOfPlayers">Nombre de joueurs</label>
+            <select formControlName="numberOfPlayers">
+                <option disabled>Nombre de joueurs</option>
+                <option *ngFor="let nbplay of nbPlayersList" [ngValue]="nbplay">{{nbplay}}</option>
+              </select>
          </div>
          <div class="form-group">
              <label for="description">Description</label>
@@ -14,20 +28,13 @@
              <label for="imageUrl">URL de l'image</label>
              <input id="imageUrl" type="text" formControlName="imageUrl">
          </div>
-         <div class="form-group">
-             <label for="location">Lieu</label>
-             <input id="location" type="text" formControlName="location">
-         </div>
+         <div class="game-card" *ngIf="gamePreview$ | async as game">
+            <img [src]="game.imageUrl" [alt]="game.title">
+        </div>
          <div class="action-buttons">
              <button type="submit" (click)="onSubmitForm()" [disabled]="gameForm.invalid">Save</button>
          </div>
     </form>
 </div>
 
-<div class="game-card" *ngIf="gamePreview$ | async as game">
-    <h2>{{ game.title | uppercase }}</h2>
-    <p>Mis en ligne {{ game.createdDate | date: 'à HH:mm, le d MMMM yyyy' }}</p>
-    <img [src]="game.imageUrl" [alt]="game.title">
-    <p>{{ game.description }}</p>
-    <p *ngIf="game.location">Photo prise à {{ game.location }}</p>
-</div>
+

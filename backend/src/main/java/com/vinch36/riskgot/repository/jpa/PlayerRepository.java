@@ -1,7 +1,6 @@
-package com.vinch36.riskgot.repository;
+package com.vinch36.riskgot.repository.jpa;
 
-import com.vinch36.riskgot.model.Player;
-import com.vinch36.riskgot.model.User;
+import com.vinch36.riskgot.model.game.Player;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,5 +1,14 @@
 version: '3'
 services:
+
+  riskgot-backend:
+    container_name: riskgot-backend
+    image: 'riskgot-backend:latest'
+    build:
+      context: .
+    depends_on:
+      - postgres-db
+
   postgres-db:
     container_name: risk-got-postgres-db
     image: postgres:latest

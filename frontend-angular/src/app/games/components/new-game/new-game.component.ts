@@ -13,6 +13,10 @@ import { GamesService } from '../../../core/services/games.service';
 export class NewGameComponent implements OnInit {
 
 
+  gameModeList: any = ['DOMINATION', 'ESCARMOUCHE'];
+
+  nbPlayersList: any = [3,4,5];
+
   gameForm!: FormGroup;
 
 
@@ -22,18 +26,20 @@ export class NewGameComponent implements OnInit {
   constructor(private gamesService:GamesService, private formBuilder: FormBuilder, private router:Router) { }
 
   ngOnInit(): void {
+  
     this.urlRegex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/;
     this.gameForm = this.formBuilder.group(
       {
         title: [null, Validators.required],
-        description: [null, Validators.required],
-        imageUrl: [null, [Validators.required, Validators.pattern(this.urlRegex)]],
-        location: [null]
+        gameMode: [null, Validators.required],
+        numberOfPlayers:[null, Validators.required],        
+        description: [null],
+        imageUrl: [null, [Validators.pattern(this.urlRegex)]]
       }, { updateOn: 'blur' });
     this.gamePreview$ = this.gameForm.valueChanges.pipe(
       map(formValue => ({
         ...formValue,
-        createdDate: new Date(),
+        //createdDate: new Date(),
         likes: 0,
         id: 0
       }))
@@ -46,7 +52,7 @@ export class NewGameComponent implements OnInit {
     this.gamesService.addGame(this.gameForm.value).pipe(
       tap(()=>this.router.navigateByUrl('/games'))
     ).subscribe();
-    
+
   }
 
 }

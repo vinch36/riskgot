@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LandingPageComponent implements OnInit {
 
-  userEmail!:string;
-  userName!:string;
+
 
   constructor(private router:Router) { }
 
@@ -23,9 +22,4 @@ export class LandingPageComponent implements OnInit {
     this.router.navigateByUrl('games');
   }
 
-
-  onSubmitForm(form:NgForm)
-  {
-    console.log(form.value);
-  }
 }

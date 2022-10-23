@@ -1,12 +1,12 @@
 header {
   text-align: center;
-  background-color: #EEE;
+  background-color:rgb(59, 59, 59);
   margin-bottom: 20px;
   padding: 10px;
 }
 a {
   margin: 0 10px;
-  color: #333;
+  color: rgb(192, 186, 186);
   text-decoration: none;
   &:hover {
     text-decoration: underline;
@@ -14,6 +14,18 @@ a {
 }
 
 .active {
-  color: #666;
+  color: aliceblue;
   text-decoration: underline;
+}
+
+
+button
+{
+  color: aliceblue;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1px;
 }

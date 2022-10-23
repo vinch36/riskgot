@@ -1,6 +1,21 @@
 <div class="single-game-card" [ngClass]="{ liked: alreadyLiked }">
-  <h2>{{ game.title | uppercase }}</h2>
-  <p>{{ game.description }}</p>
-  <img [src]="game.imageUrl" [alt]="game.title">
-  <button (click)="onViewGame()">VIEW</button>
+  <div class="grid-container">
+   
+
+    <div class="grid-child">
+      <h4>Nom de la partie: {{ game.title | uppercase }}</h4>
+      <p>Mode de jeu: {{ game.gameMode | uppercase }}</p>
+      <p>Nombre de joueurs: {{ game.numberOfPlayers }}</p>
+      <p>Status: {{ game.gameStatus }}</p>
+      <p>Description: </p>
+      <p style="white-space: pre-wrap;font-size: 10px">{{ game.description }}</p>
+      <div style="align-items:center;">
+        <button (click)="onViewGame()">VISUALISER</button>
+      </div>
+    </div>
+    <div class="grid-child">
+      <img [src]="game.imageUrl" [alt]="game.title">
+    </div>
+    
+  </div>
 </div>

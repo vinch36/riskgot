@@ -1,9 +1,17 @@
 <header>
-  <h1>risk games of thrones</h1>
-  <h3>(c)2022 vinch36</h3>
   <nav>
-    <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <div class="grid-container">
+    <div class="grid-child">
+    <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><img src="assets/images/logo/riskgot-logo-small.png" alt="Risk-got logo"></a>
+    <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><span style="font-size:24px;font-weight: bold;">Risk Games of Thrones</span></a><span style="font-size:10px;color:lightgray;">&nbsp;&nbsp;(c)2022 vinch36 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>
     <a routerLink="games" routerLinkActive="active">Games</a>
+    <a routerLink="healthcheck" routerLinkActive="active">healthCheck</a>
+  </div>
+    <div class="grid-child" style="text-align:right">
+      <app-authbutton ></app-authbutton>
+      <app-profilebutton  *ngIf="usersService.userBackend$" ></app-profilebutton>
+    </div>
+  </div>
+    
   </nav>
-  <button (click) = "onAddNewGame()">+</button>
 </header>

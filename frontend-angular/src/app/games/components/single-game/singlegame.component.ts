@@ -27,7 +27,7 @@ export class SinglegameComponent implements OnInit {
       this.alreadyLiked = false;
       const gameId=+this.route.snapshot.params['id'];
       this.game$ = this.gamesService.getGameById(gameId);
-    
+
   }
 
   onLike(gameId: number) {
@@ -35,7 +35,7 @@ export class SinglegameComponent implements OnInit {
     this.game$=this.gamesService.likeGameById(gameId,'like').pipe(
       tap(()=>this.likeButtonText='Unlike')
     );
-    
+
     }
     else{
       this.game$=this.gamesService.likeGameById(gameId,'unlike').pipe(

@@ -5,9 +5,9 @@ import { NewGameComponent } from "./components/new-game/new-game.component";
 import { SinglegameComponent } from "./components/single-game/singlegame.component";
 
 const routes:Routes =[
-    {path:'create', component: NewGameComponent },
+    {path:'create', component: NewGameComponent},
     {path:':id', component: SinglegameComponent},
-    {path:'', component: GameListComponent }    
+    {path:'', component: GameListComponent }
 ]
 
 

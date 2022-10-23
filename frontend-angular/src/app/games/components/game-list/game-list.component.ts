@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { interval, tap , takeUntil, Subject, Observable } from 'rxjs';
 import { Game } from '../../../core/models/game.model';
 import { GamesService } from '../../../core/services/games.service';
@@ -13,17 +14,20 @@ export class GameListComponent implements OnInit, OnDestroy {
 
   games$!:Observable<Game[]>;
 
-  private destroy$!:Subject<boolean>;
 
-  constructor(private gamesService:GamesService) { }
+  constructor(private gamesService:GamesService, private router:Router) { }
 
   ngOnInit(): void {
-   
-    //this.games = this.gamesService.getAllGames();
     this.games$=this.gamesService.getAllGames();
   }
 
   ngOnDestroy(){
+  }
+
+  onCreateGame(){
+    this.router.navigateByUrl('/games/create');
+
+
   }
 
 }

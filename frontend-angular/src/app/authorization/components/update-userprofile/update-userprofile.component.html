@@ -1,0 +1,21 @@
+<div class="form-card">
+    <h2>UPDATE PROFILE</h2>
+    <form [formGroup]="userForm">
+      <div class="form-group">
+             <label for="nickname">NickName</label>
+             <input id="nickname" type="text" formControlName="nickname">
+         </div>
+         <div class="form-group">
+             <label for="picture">URL de l'image</label>
+             <input id="picture" type="text" formControlName="picture">
+         </div>
+         <div class="user-card" *ngIf="userProfilePreview$ | async as userProfilePreview">
+            <img [src]="userProfilePreview.picture" [alt]="userProfilePreview.nickname">
+            <h3>Nickname: {{userProfilePreview.nickname}}</h3>
+        </div>
+         <div class="action-buttons">
+             <button type="submit" (click)="onSubmitForm()" [disabled]="userForm.invalid">ENREGISTRER</button>
+         </div>
+    </form>
+</div>
+

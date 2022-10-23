@@ -1,0 +1,22 @@
+<div class ="single-profile-card" *ngIf="usersService.userBackend$ | async as userBackend">
+  <div class="row align-items-center profile-header">
+    <div class="col-md-2 mb-3">
+      <img
+        [src]="userBackend.picture"
+        alt="User's profile picture"
+        class="rounded-circle img-fluid profile-picture"
+      />
+    </div>
+    <div class="col-md text-center text-md-left">
+      <h2>Nickname : {{ userBackend.nickname }}</h2>
+      <p class="lead text-muted">Email : {{ userBackend.email }}</p>
+    </div>
+     <div class="col-md text-center text-md-left">
+      <p class="lead text-muted">Email vérifié : {{ userBackend.email_verified }}</p>
+    </div>
+  </div>
+  <button (click)="onClick()">Modifier</button>
+</div>
+
+      
+    

@@ -1,0 +1,13 @@
+<div>
+<h1>Serveur Status</h1>
+
+
+<div *ngIf="healthCheck$ | async as healthCheck">
+    <h2>{{ healthCheck.message}}</h2>
+    <h3>Le serveur a été démarré {{ healthCheck.startDate | date : ' le d MMMM yyyy à HH:mm'}}</h3>
+    <h3>Soit, depuis  {{ healthCheck.timeSinceStarted| date:'HH:mm:ss':'GMT' }} </h3>
+</div>
+<button (click)="onClickBack()">Retour</button>
+</div>  
+
+
